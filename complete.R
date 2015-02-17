@@ -10,10 +10,13 @@ complete <- function(directory='specdata', id=1:332) {
       filepath2 <- file.path("C:/",directory,"/", csvfile2)
       dataset <- read.csv(filepath2)
   
-      totalrows <- nrow(dataset)
-      totalincomplete <- sum(is.na(dataset$sulfate))
-      totalcomplete <- totalrows - totalincomplete                       
-
+      #totalrows <- nrow(dataset)
+      #totalincomplete <- sum(is.na(dataset$sulfate))
+      #totalcomplete <- totalrows - totalincomplete                       
+      
+      totalcomplete <- nrow(dataset[complete.cases(dataset),])
+      
+      
       df <- rbind(df,data.frame(id = i, nobs = totalcomplete))
     
   } ## end for loop through IDs
