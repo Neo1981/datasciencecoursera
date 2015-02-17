@@ -3,15 +3,15 @@
 pollutantmean <- function(directory='specdata',pollutant, id=1:332) {
   for (i in id )  {
     if (!exists("dataset")){
-      csvfile2 <- sprintf("%03d.csv",i)
-      filepath2 <- file.path("C:/",directory,"/", csvfile2)
-      dataset <- read.csv(filepath2)
+      csvfile <- sprintf("%03d.csv",i)
+      filepath <- file.path("C:/",directory,"/", csvfile)
+      dataset <- read.csv(filepath)
       next
     }
     if (exists("dataset"))   {
-      csvfile2 <- sprintf("%03d.csv",i)
-      filepath2 <- file.path("C:/",directory,"/", csvfile2)
-      temp_dataset <- read.csv(filepath2)
+      csvfile <- sprintf("%03d.csv",i)
+      filepath <- file.path("C:/",directory,"/", csvfile)
+      temp_dataset <- read.csv(filepath)
       dataset<-rbind(dataset, temp_dataset)
       rm(temp_dataset)
     }
@@ -19,7 +19,7 @@ pollutantmean <- function(directory='specdata',pollutant, id=1:332) {
   
   
   
-  result <- mean(dataset[[pollutant]],na.rm=TRUE)
+  result <- round(mean(dataset[[pollutant]],na.rm=TRUE),digits=3)
   
   print(result)
 }
